@@ -18,9 +18,9 @@ app.listen("5670",()=>{
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
   let token =await registerToken(req.query.code);
-  console.log(token.json());
   let response=token.json();
-  await lineNotifyMessage(response.access_token,"test");
+  console.log(response);
+  await lineNotifyMessage(JSON.stringify(response.access_token),"test");
   res.send("OK");
 });
 
