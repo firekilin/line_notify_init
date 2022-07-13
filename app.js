@@ -37,14 +37,14 @@ let registerToken=async(AuthorizeCode)=>{
 };
   let url = new URL("https://notify-bot.line.me/oauth/token");
   Object.keys(test).forEach(key=>url.searchParams.append(key,test[key]));
-  let access_token="";
-  let req=await request.post({headers: 
+  await request.post({headers: 
     {'content-type' : 'application/x-www-form-urlencoded'},
       url:url},(error,response,body)=>{
-        access_token=body.access_token;
+        const access_token=body.access_token;
+        return access_token;
     })
   
-  return access_token;
+  
 }
 
 let lineNotifyMessage=async (token, msg)=>{
@@ -59,8 +59,4 @@ let lineNotifyMessage=async (token, msg)=>{
         console.log(response);
         console.log(body);
     })
-
-  console.log(req);
-  return req;
-
 }
