@@ -18,8 +18,9 @@ app.listen("5670",()=>{
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
   let token =await registerToken(req.query.code);
-  console.log(token);
-  await lineNotifyMessage(token,"test");
+  let response=token.body.json();
+  console.log(JSON.stringify(response));
+  await lineNotifyMessage(response.access_token,"test");
   res.send("OK");
 });
 
@@ -35,14 +36,13 @@ let registerToken=async(AuthorizeCode)=>{
 };
   let url = new URL("https://notify-bot.line.me/oauth/token");
   Object.keys(test).forEach(key=>url.searchParams.append(key,test[key]));
-  await fetch(url,{
+  const ans= await fetch(url,{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  }).then((data)=>{
-    console.log(data);
-    return data;
   });
 
+  console.log(ans.status);
+  return ans;
 }
 
 let lineNotifyMessage=async (token, msg)=>{
