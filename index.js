@@ -24,11 +24,9 @@ app.get("/",express.json(),async(req,res)=>{
 
 //註冊 token
 let registerToken=async(code)=>{
-  console.log(process.env.CLIENT_SECRET);
   let url="https://notify-bot.line.me/oauth/token";
   const ans= await fetch(url,{
     method:"POST",
-    "content-type":"application/x-www-form-urlencoded",
     body:{
       grant_type:"authorization_code",
       code:code,
