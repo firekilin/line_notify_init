@@ -28,11 +28,12 @@ let registerToken=async(AuthorizeCode)=>{
   let test={
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      "grant_type":"authorization_code",
+    data:{"grant_type":"authorization_code",
       "code":AuthorizeCode,
       "redirect_uri":"https://icecube.servegame.com/linenotify",
       "client_id":process.env.CLIENT_ID,
       "client_secret":process.env.CLIENT_SECRET
+  }
   };
   console.log(test);
   const ans= await fetch("https://notify-bot.line.me/oauth/token",test);
