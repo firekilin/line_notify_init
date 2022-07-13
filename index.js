@@ -34,7 +34,7 @@ let registerToken=async(AuthorizeCode)=>{
 };
   let url = new URL("https://notify-bot.line.me/oauth/token");
   Object.keys(test).forEach(key=>url.searchParams.append(key,test[key]));
-  const ans= await fetch("url",{
+  const ans= await fetch(url,{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   });
