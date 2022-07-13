@@ -27,7 +27,7 @@ let registerToken=async(code)=>{
   let url="https://notify-bot.line.me/oauth/token";
   const ans= await fetch(url,{
     method:"POST",
-    "Content-Type":"application/x-www-form-urlencoded",
+    "content-type":"application/x-www-form-urlencoded",
     body:{
       grant_type:"authorization_code",
       code:code,
@@ -36,7 +36,7 @@ let registerToken=async(code)=>{
       client_secret:process.env.CLIENT_SECRET
     }
   });
-  console.log(ans);
+  console.log(ans.status);
   return ans;
 }
 
