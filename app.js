@@ -19,15 +19,15 @@ app.listen("5670",()=>{
 //建置callback
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
-  let token =await registerToken(req.query.code);
-  console.log(token);
-  await lineNotifyMessage(token,"test");
+  await registerToken(req.query.code,(token)=>{
+    await lineNotifyMessage(token,"test");
+  });
   res.send("OK");
 });
 
 
 //註冊 token
-let registerToken=async(AuthorizeCode)=>{
+let registerToken=async(AuthorizeCode,token)=>{
   let test={
     "grant_type":"authorization_code",
     "code":AuthorizeCode,
@@ -40,8 +40,8 @@ let registerToken=async(AuthorizeCode)=>{
   await request.post({headers: 
     {'content-type' : 'application/x-www-form-urlencoded'},
       url:url},(error,response,body)=>{
-        const access_token=body.access_token;
-        return access_token;
+        console.log(body.access_token);
+        token(body.access_token);
     })
   
   
