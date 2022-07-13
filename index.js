@@ -29,7 +29,7 @@ let registerToken=async(code)=>{
   const ans= await fetch(url,{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    data:{
+    body:{
       grant_type:"authorization_code",
       code:code,
       redirect_uri:"https://icecube.servegame.com/linenotify",
@@ -38,7 +38,7 @@ let registerToken=async(code)=>{
     }
   });
   console.log(ans.status);
-  return ans;
+  return ans.access_token;
 }
 
 let lineNotifyMessage=(token, msg)=>{
@@ -48,6 +48,6 @@ let lineNotifyMessage=(token, msg)=>{
     }
 
     let payload = {'message': msg}
-    let r = fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, data:payload})
+    let r = fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body:payload})
     return r.status_code
   }
