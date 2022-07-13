@@ -7,8 +7,8 @@ const app=express();
 //我的個人網站：https://icecube.service.com
 //我將使用nginx 把這app轉至：https://icecube.service.com/linenotify
 
-app.listen("5270",()=>{
-  console.log("listen 5270");
+app.listen("5670",()=>{
+  console.log("listen 5670");
 });
 
 //建置callback
