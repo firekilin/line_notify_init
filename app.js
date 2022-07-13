@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express from 'express';
+import express, { response } from 'express';
 import fetch from 'node-fetch';
 import request from "request";
 
@@ -32,9 +32,12 @@ let registerToken=async(AuthorizeCode)=>{
     {'content-type' : 'application/x-www-form-urlencoded'},
       url:"https://notify-bot.line.me/oauth/token",
       body:`grant_type=authorization_code&code=AuthorizeCode&redirect_uri=https://icecube.servegame.com/linenotify&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`
+    },(error,response,body)=>{
+      console.log(error+"\n");
+      console.log(response+"\n");
+      console.log(body+"\n");
     })
-  console.log(`grant_type=authorization_code&code=AuthorizeCode&redirect_uri=https://icecube.servegame.com/linenotify&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`);
-  console.log(req);
+  
   return req;
 }
 
