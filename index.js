@@ -1,5 +1,5 @@
-require('dotenv').config();
-const express=require('express');
+import "dotenv/config";
+import express from 'express'
 const app=express();
 //使用者訂閱
 //https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=ngegPHE6scsOCHLoJ32gsp&redirect_uri=https://icecube.servegame.com/linenotify&scope=notify&state=NO_STATE
