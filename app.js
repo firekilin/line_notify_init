@@ -40,8 +40,8 @@ let registerToken=async(AuthorizeCode,token)=>{
   await request.post({headers: 
     {'content-type' : 'application/x-www-form-urlencoded'},
       url:url},(error,response,body)=>{
-        console.log(body.access_token);
-        token(body.access_token);
+        console.log(body.json().access_token);
+        token(body.json().access_token);
     })
   
   
