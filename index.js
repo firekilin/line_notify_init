@@ -32,12 +32,11 @@ let registerToken=async(AuthorizeCode)=>{
     "client_id":process.env.CLIENT_ID,
     "client_secret":process.env.CLIENT_SECRET
 };
-
-  console.log(test);
-  const ans= await fetch("https://notify-bot.line.me/oauth/token",{
+  let url = new URL("https://notify-bot.line.me/oauth/token");
+  Object.keys(test).forEach(key=>url.searchParams.append(key,test[key]));
+  const ans= await fetch("url",{
     method:"POST",
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body:  JSON.stringify(test)
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   });
 
   console.log(ans.status);
