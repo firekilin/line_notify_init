@@ -20,8 +20,8 @@ app.listen("5670",()=>{
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
   let token =await registerToken(req.query.code);
-  console.log(token.access_token);
-  //await lineNotifyMessage(access_token,"test");
+  console.log(token);
+  await lineNotifyMessage(token,"test");
   res.send("OK");
 });
 
@@ -37,15 +37,14 @@ let registerToken=async(AuthorizeCode)=>{
 };
   let url = new URL("https://notify-bot.line.me/oauth/token");
   Object.keys(test).forEach(key=>url.searchParams.append(key,test[key]));
+  let access_token="";
   let req=await request.post({headers: 
     {'content-type' : 'application/x-www-form-urlencoded'},
       url:url},(error,response,body)=>{
-      console.log(error+"\n");
-      console.log(response+"\n");
-      console.log(body+"\n");
+        access_token=body.access_token;
     })
   
-  return req;
+  return access_token;
 }
 
 let lineNotifyMessage=async (token, msg)=>{
@@ -54,11 +53,8 @@ let lineNotifyMessage=async (token, msg)=>{
       "Authorization": "Bearer " + token,
       "Content-Type": "application/x-www-form-urlencoded"
     },
-      url:"https://notify-api.line.me/api/notify?message=test",
-      body:{
-        "grant_type":"authorization_code",
-       
-    }})
+      url:"https://notify-api.line.me/api/notify",
+      body:"message=test"})
 
   console.log(req.status);
   return req;
