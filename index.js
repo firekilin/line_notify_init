@@ -55,9 +55,9 @@ let lineNotifyMessage=async (token, msg)=>{
         "Authorization": "Bearer " + token,
         "Content-Type": "multipart/form-data"
     }
-    const form = new FormData();
+    const body = new FormData();
     form.append('message', msg);
 
-    let r =await fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body:form})
+    let r =await fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body})
     return r.status_code
   }
