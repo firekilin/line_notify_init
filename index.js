@@ -1,6 +1,9 @@
 require('dotenv').config();
 const express=require('express');
 const app=express();
+const bodyParser = require ("body-parser"); //設定取得req.body
+app.use ( bodyParser.json () ); //req.body支援json格式
+app.use ( bodyParser.urlencoded ( { extended: true } ) ); //解析內容 
 //使用者訂閱
 //https: //notify-bot.line.me/oauth/authorize?response_type=code&client_id=ngegPHE6scsOCHLoJ32gsp&redirect_uri=https://icecube.service.com/linenotify&scope=notify&state=NO_STATE
 //
@@ -11,12 +14,14 @@ app.listen("5670",()=>{
   console.log("listen 5670");
 });
 
+
 //建置callback
 app.get("/",async(req,res)=>{
   console.log(req.body);
   //registerToken(req.body);
   res.send("OK");
 });
+
 
 //註冊 token
 let registerToken=async(code)=>{
