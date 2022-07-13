@@ -57,5 +57,6 @@ let lineNotifyMessage=async (token, msg)=>{
     }
 
     let r =await fetch("https://notify-api.line.me/api/notify?message=test", {method:"POST" ,headers:headers})
-    return r.status_code
+    console.log(r);
+    return r
   }
