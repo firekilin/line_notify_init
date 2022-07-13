@@ -48,15 +48,19 @@ let registerToken=async(AuthorizeCode)=>{
 }
 
 let lineNotifyMessage=async (token, msg)=>{
-  let req=request.post({headers: 
+  let req=await request.post({headers: 
     {
       "Authorization": "Bearer " + token,
       "Content-Type": "application/x-www-form-urlencoded"
     },
       url:"https://notify-api.line.me/api/notify",
-      body:"message=test"})
+      body:"message=test"},(error,response,body)=>{
+        console.log(error);
+        console.log(response);
+        console.log(body);
+    })
 
-  console.log(req.status);
+  console.log(req);
   return req;
 
 }
