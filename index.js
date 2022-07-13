@@ -24,16 +24,16 @@ app.get("/",express.json(),async(req,res)=>{
 
 
 //註冊 token
-let registerToken=async(code)=>{
+let registerToken=async(AuthorizeCode)=>{
   const ans= await fetch("https://notify-bot.line.me/oauth/token",{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body:{
-      grant_type:"authorization_code",
-      code:code,
-      redirect_uri:"https://icecube.servegame.com/linenotify",
-      client_id:process.env.CLIENT_ID,
-      client_secret:process.env.CLIENT_SECRET
+      "grant_type":authorization_code,
+      "code":AuthorizeCode,
+      "redirect_uri":"https://icecube.servegame.com/linenotify",
+      "client_id":process.env.CLIENT_ID,
+      "client_secret":process.env.CLIENT_SECRET
     }
   });
   console.log(ans);
