@@ -13,8 +13,8 @@ app.listen("5670",()=>{
 
 //建置callback
 app.get("/",async(req,res)=>{
-  console.log(req.body.code);
-  registerToken(req.body.code);
+  console.log(req.body);
+  //registerToken(req.body);
   res.send("OK");
 });
 
