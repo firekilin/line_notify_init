@@ -18,8 +18,8 @@ app.listen("5670",()=>{
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
   let token =await registerToken(req.query.code);
-  let response=token.body.json();
-  console.log(JSON.stringify(response));
+  let response=JSON.stringify(token.body);
+  console.log(response);
   await lineNotifyMessage(response.access_token,"test");
   res.send("OK");
 });
