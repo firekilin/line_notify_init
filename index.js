@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from 'express';
 import fetch from 'node-fetch';
-import FormData from "form-data";
+
 
 const app=express();
 //使用者訂閱
@@ -53,11 +53,9 @@ let registerToken=async(AuthorizeCode)=>{
 let lineNotifyMessage=async (token, msg)=>{
     let headers = {
         "Authorization": "Bearer " + token,
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "application/x-www-form-urlencoded"
     }
-    const body = new FormData();
-    form.append('message', msg);
 
-    let r =await fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body})
+    let r =await fetch("https://notify-api.line.me/api/notify?message=test", {method:"POST" ,headers:headers})
     return r.status_code
   }
