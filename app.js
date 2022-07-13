@@ -21,7 +21,7 @@ app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
   let token =await registerToken(req.query.code);
   console.log(token.access_token);
-  await lineNotifyMessage(access_token,"test");
+  //await lineNotifyMessage(access_token,"test");
   res.send("OK");
 });
 
