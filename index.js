@@ -29,7 +29,7 @@ let registerToken=async(AuthorizeCode)=>{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body:{
-      "grant_type":authorization_code,
+      "grant_type":"authorization_code",
       "code":AuthorizeCode,
       "redirect_uri":"https://icecube.servegame.com/linenotify",
       "client_id":process.env.CLIENT_ID,
