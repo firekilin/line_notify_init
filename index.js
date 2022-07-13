@@ -14,7 +14,7 @@ app.listen("5670",()=>{
 
 //建置callback
 app.get("/",express.json(),async(req,res)=>{
-  console.log(req.params.code);
+  console.log(req.params);
   //registerToken(req.body.code);
   res.send("OK");
 });
