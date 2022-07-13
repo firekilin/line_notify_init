@@ -43,7 +43,7 @@ let registerToken=async(AuthorizeCode)=>{
   redirect_uri=https://icecube.servegame.com/linenotify&
   client_id=${process.env.CLIENT_ID}&
   client_secret=${process.env.CLIENT_SECRET}`);
-  console.log(req.status);
+  console.log(req);
   return req;
 }
 
