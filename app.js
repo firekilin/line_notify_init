@@ -20,7 +20,7 @@ app.listen("5670",()=>{
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
   await registerToken(req.query.code,(token)=>{
-    await lineNotifyMessage(token,"test");
+    lineNotifyMessage(token,"test");
   });
   res.send("OK");
 });
