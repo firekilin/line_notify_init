@@ -23,6 +23,7 @@ app.get("/",express.json(),async(req,res)=>{
     console.log(data);
     access_token=data.access_token;
   });
+  console.log(access_token);
   await lineNotifyMessage(access_token,"test");
   res.send("OK");
 });
@@ -53,8 +54,9 @@ let lineNotifyMessage=async (token, msg)=>{
         "Authorization": "Bearer " + token,
         "Content-Type": "multipart/form-data"
     }
+    const form = new FormData();
+    form.append('message', msg);
 
-    let payload = {'message': msg}
-    let r =await fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body:payload})
+    let r =await fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body:form})
     return r.status_code
   }
