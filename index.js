@@ -17,16 +17,15 @@ app.listen("5670",()=>{
 //建置callback
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
-  let token =registerToken(req.query.code);
-  lineNotifyMessage(token,"test");
+  let token =await registerToken(req.query.code);
+  await lineNotifyMessage(token,"test");
   res.send("OK");
 });
 
 
 //註冊 token
 let registerToken=async(code)=>{
-  let url="https://notify-bot.line.me/oauth/token";
-  const ans= await fetch(url,{
+  const ans= await fetch("https://notify-bot.line.me/oauth/token",{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body:{
@@ -41,13 +40,13 @@ let registerToken=async(code)=>{
   return ans.access_token;
 }
 
-let lineNotifyMessage=(token, msg)=>{
+let lineNotifyMessage=async (token, msg)=>{
     let headers = {
         "Authorization": "Bearer " + token,
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
     let payload = {'message': msg}
-    let r = fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body:payload})
+    let r =await fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, body:payload})
     return r.status_code
   }
