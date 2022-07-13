@@ -31,7 +31,7 @@ let registerToken=async(code)=>{
     body:{
       grant_type:"authorization_code",
       code:code,
-      redirect_uri:"https://icecube.service.com/linenotify",
+      redirect_uri:"https://icecube.servegame.com/linenotify",
       client_id:process.env.CLIENT_ID,
       client_secret:process.env.CLIENT_SECRET
     }
