@@ -1,7 +1,5 @@
-import { json } from "body-parser";
 import "dotenv/config";
 import express, { response } from 'express';
-import fetch from 'node-fetch';
 import request from "request";
 
 
@@ -41,9 +39,9 @@ let registerToken=async(AuthorizeCode,token)=>{
   await request.post({headers: 
     {'content-type' : 'application/x-www-form-urlencoded'},
       url:url},(error,response,body)=>{
-        
-        console.log(json(body).access_token);
-        token(json(body).access_token);
+        let getbody=JSON.parse(body);
+        console.log(getbody.access_token);
+        token(getbody.access_token);
     })
   
   
