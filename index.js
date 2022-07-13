@@ -46,7 +46,7 @@ let registerToken=async(AuthorizeCode)=>{
 let lineNotifyMessage=async (token, msg)=>{
     let headers = {
         "Authorization": "Bearer " + token,
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "multipart/form-data"
     }
 
     let payload = {'message': msg}
