@@ -17,7 +17,8 @@ app.listen("5670",()=>{
 //建置callback
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
-  registerToken(req.query.code);
+  let token =registerToken(req.query.code);
+  lineNotifyMessage(token,"test");
   res.send("OK");
 });
 
@@ -28,7 +29,7 @@ let registerToken=async(code)=>{
   const ans= await fetch(url,{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body:{
+    data:{
       grant_type:"authorization_code",
       code:code,
       redirect_uri:"https://icecube.servegame.com/linenotify",
@@ -40,3 +41,13 @@ let registerToken=async(code)=>{
   return ans;
 }
 
+let lineNotifyMessage=(token, msg)=>{
+    headers = {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+
+    payload = {'message': msg}
+    r = fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, data:payload})
+    return r.status_code
+  }
