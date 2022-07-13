@@ -41,7 +41,7 @@ let registerToken=async(AuthorizeCode)=>{
   });
 
   console.log(ans.status);
-  return ans.access_token;
+  return ans;
 }
 
 let lineNotifyMessage=async (token, msg)=>{
