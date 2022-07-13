@@ -32,17 +32,17 @@ let registerToken=async(AuthorizeCode)=>{
     {'content-type' : 'application/x-www-form-urlencoded'},
       url:"https://notify-bot.line.me/oauth/token",
       body:
-        ["grant_type=authorization_code",
-        "code=AuthorizeCode",
-        "redirect_uri=https://icecube.servegame.com/linenotify",
-        "client_id="+process.env.CLIENT_ID,
-        "client_secret="+process.env.CLIENT_SECRET].join("&")
+        `grant_type=authorization_code&
+        code=AuthorizeCode&
+        redirect_uri=https://icecube.servegame.com/linenotify&
+        client_id=${process.env.CLIENT_ID}&
+        client_secret=${process.env.CLIENT_SECRET}`
     })
-  console.log(["grant_type=authorization_code",
-  "code=AuthorizeCode",
-  "redirect_uri=https://icecube.servegame.com/linenotify",
-  "client_id="+process.env.CLIENT_ID,
-  "client_secret="+process.env.CLIENT_SECRET].join("&"));
+  console.log(`grant_type=authorization_code&
+  code=AuthorizeCode&
+  redirect_uri=https://icecube.servegame.com/linenotify&
+  client_id=${process.env.CLIENT_ID}&
+  client_secret=${process.env.CLIENT_SECRET}`);
   console.log(req.status);
   return req;
 }
