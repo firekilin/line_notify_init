@@ -28,7 +28,7 @@ let registerToken=async(code)=>{
   const ans= await fetch("https://notify-bot.line.me/oauth/token",{
     method:"POST",
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    query:{
+    body:{
       grant_type:"authorization_code",
       code:code,
       redirect_uri:"https://icecube.servegame.com/linenotify",
