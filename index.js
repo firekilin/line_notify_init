@@ -18,9 +18,12 @@ app.listen("5670",()=>{
 app.get("/",express.json(),async(req,res)=>{
   console.log(req.query.code);
   let token =await registerToken(req.query.code);
-  const jsontoken=token.json();
-  console.log(jsontoken);
-  await lineNotifyMessage(jsontoken.access_token,"test");
+  let access_token="";
+  token.json().then((data)=>{
+    console.log(data);
+    access_token=data.access_token;
+  });
+  await lineNotifyMessage(access_token,"test");
   res.send("OK");
 });
 
