@@ -1,14 +1,11 @@
 require('dotenv').config();
 const express=require('express');
 const app=express();
-const bodyParser = require ("body-parser"); //設定取得req.body
-app.use ( bodyParser.json () ); //req.body支援json格式
-app.use ( bodyParser.urlencoded ( { extended: true } ) ); //解析內容 
 //使用者訂閱
-//https: //notify-bot.line.me/oauth/authorize?response_type=code&client_id=ngegPHE6scsOCHLoJ32gsp&redirect_uri=https://icecube.service.com/linenotify&scope=notify&state=NO_STATE
+//https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=ngegPHE6scsOCHLoJ32gsp&redirect_uri=https://icecube.servegame.com/linenotify&scope=notify&state=NO_STATE
 //
-//我的個人網站：https://icecube.service.com
-//我將使用nginx 把這app轉至：https://icecube.service.com/linenotify
+//我的個人網站：https://icecube.servegame.com/
+//我將使用nginx 把這app轉至：https://icecube.servegame.com/linenotify
 
 app.listen("5670",()=>{
   console.log("listen 5670");
@@ -16,9 +13,9 @@ app.listen("5670",()=>{
 
 
 //建置callback
-app.get("/",async(req,res)=>{
-  console.log(req.body);
-  //registerToken(req.body);
+app.get("/",express.json(),async(req,res)=>{
+  console.log(req.body.code);
+  registerToken(req.body.code);
   res.send("OK");
 });
 
