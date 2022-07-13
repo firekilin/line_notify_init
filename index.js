@@ -42,12 +42,12 @@ let registerToken=async(code)=>{
 }
 
 let lineNotifyMessage=(token, msg)=>{
-    headers = {
+    let headers = {
         "Authorization": "Bearer " + token,
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
-    payload = {'message': msg}
-    r = fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, data:payload})
+    let payload = {'message': msg}
+    let r = fetch("https://notify-api.line.me/api/notify", {method:"POST" ,headers:headers, data:payload})
     return r.status_code
   }
